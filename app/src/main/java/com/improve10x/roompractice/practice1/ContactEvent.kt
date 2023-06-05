@@ -1,4 +1,4 @@
-package com.improve10x.roompractice
+package com.improve10x.roompractice.practice1
 
 sealed interface ContactEvent{
     object SaveContact : ContactEvent

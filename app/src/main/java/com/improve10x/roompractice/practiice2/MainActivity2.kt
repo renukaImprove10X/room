@@ -1,4 +1,4 @@
-package com.improve10x.roompractice
+package com.improve10x.roompractice.practiice2
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -10,20 +10,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 
-class MainActivity : AppCompatActivity() {
+class MainActivity2 : AppCompatActivity() {
 
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
-            ContactDatabase::class.java,
-            "contacts.db"
+            ContactDatabase2::class.java,
+            "contacts3.db"
         ).build()
     }
-    private val viewModel by viewModels<ContactViewModel>(
+    private val viewModel by viewModels<ContactViewModel2>(
         factoryProducer = {
             object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return ContactViewModel(db.dao) as T
+                    return ContactViewModel2(db.dao) as T
                 }
             }
         }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val state by viewModel.state.collectAsState()
-            ContactScreen(state = state, onEvent = viewModel::onEvent)
+            ContactScreen2(state = state, onEvent = viewModel::onEvent)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.improve10x.roompractice
+package com.improve10x.roompractice.practiice2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,13 +18,13 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddContactDialog(
-    state : ContactState,
-    onEvent: (ContactEvent) -> Unit,
+    state : ContactState2,
+    onEvent: (ContactEvent2) -> Unit,
     modifier: Modifier = Modifier
 ){
     AlertDialog(
         modifier = modifier,
-        onDismissRequest = {onEvent(ContactEvent.HideDialog)},
+        onDismissRequest = {onEvent(ContactEvent2.HideDialog)},
         title = { Text(text = "Add Contact")},
         text = {
             Column(
@@ -33,7 +33,7 @@ fun AddContactDialog(
                 TextField(
                     value = state.firstName,
                     onValueChange = {
-                        onEvent(ContactEvent.SetFirstName(it))
+                        onEvent(ContactEvent2.SetFirstName(it))
                     },
                     placeholder = {
                         Text(text = "First Name")
@@ -42,7 +42,7 @@ fun AddContactDialog(
                 TextField(
                     value = state.lastName,
                     onValueChange = {
-                        onEvent(ContactEvent.SetLastName(it))
+                        onEvent(ContactEvent2.SetLastName(it))
                     },
                     placeholder = {
                         Text(text = "Last Name")
@@ -51,10 +51,19 @@ fun AddContactDialog(
                 TextField(
                     value = state.phoneNumber,
                     onValueChange = {
-                        onEvent(ContactEvent.SetPhoneNumber(it))
+                        onEvent(ContactEvent2.SetPhoneNumber(it))
                     },
                     placeholder = {
                         Text(text = "Phone Number")
+                    }
+                )
+                TextField(
+                    value = state.emailId,
+                    onValueChange = {
+                        onEvent(ContactEvent2.SetEmailId(it))
+                    },
+                    placeholder = {
+                        Text(text = "Email Id")
                     }
                 )
             }
@@ -65,7 +74,7 @@ fun AddContactDialog(
                contentAlignment = Alignment.CenterEnd
            ){
                Button(onClick = {
-                   onEvent(ContactEvent.SaveContact)
+                   onEvent(ContactEvent2.Save2Contact)
                }){
                    Text(text = "Save")
                }

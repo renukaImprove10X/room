@@ -1,5 +1,4 @@
-package com.improve10x.roompractice
-
+package com.improve10x.roompractice.practiice2
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -17,7 +16,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.RadioButton
@@ -29,26 +27,27 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.reflect.KSuspendFunction1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactScreen(
-    state: ContactState,
-    onEvent: (ContactEvent) -> Unit
+fun ContactScreen2(
+    state: ContactState2,
+    onEvent: (ContactEvent2) -> Unit
 ) {
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = {
-            onEvent(ContactEvent.ShowDialog)
-        }) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add Contact"
-            )
-        }
-    }, modifier = Modifier.padding(16.dp)
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                onEvent(ContactEvent2.ShowDialog)
+            }) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add Contact"
+                )
+            }
+        }, modifier = Modifier.padding(16.dp)
+
     ) { padding ->
-        if(state.isAddingContact){
+        if (state.isAddingContact) {
             AddContactDialog(state = state, onEvent = onEvent)
         }
         LazyColumn(
@@ -58,21 +57,22 @@ fun ContactScreen(
         ) {
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState()),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    SortType.values().forEach { sortType ->
+                    SortType2.values().forEach { sortType ->
                         Row(
                             modifier = Modifier
                                 .clickable {
-                                    onEvent(ContactEvent.SortContacts(sortType))
+                                    onEvent(ContactEvent2.SortContacts(sortType))
                                 },
                             verticalAlignment = CenterVertically
                         ) {
-                            RadioButton(
-                                selected = state.sortType == sortType,
+                            RadioButton(selected = state.sortType2 == sortType,
                                 onClick = {
-                                    onEvent(ContactEvent.SortContacts(sortType))
+                                    onEvent(ContactEvent2.SortContacts(sortType))
                                 }
                             )
                             Text(text = sortType.name)
@@ -80,11 +80,9 @@ fun ContactScreen(
                     }
                 }
             }
-            items(state.contacts){ contact ->
-                Row (
-                    modifier = Modifier.fillMaxWidth()
-                        ){
-                    Column( modifier = Modifier.weight(1f)) {
+            items(state.contacts) { contact ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = "${contact.firstName} ${contact.lastName}",
                             fontSize = 20.sp
@@ -93,15 +91,22 @@ fun ContactScreen(
                             text = "${contact.phoneNumber}",
                             fontSize = 12.sp
                         )
+                        Text(
+                            text = "${contact.emailId}",
+                            fontSize = 12.sp
+                        )
                     }
                     IconButton(onClick = {
-                        onEvent(ContactEvent.DeleteContact(contact))
-                    }){
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete Contact")
+                        onEvent(ContactEvent2.Delete2Contact(contact))
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete Contact"
+                        )
                     }
                 }
-
             }
         }
+
     }
 }

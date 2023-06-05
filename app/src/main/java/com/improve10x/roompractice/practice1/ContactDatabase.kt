@@ -1,4 +1,4 @@
-package com.improve10x.roompractice
+package com.improve10x.roompractice.practice1
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
